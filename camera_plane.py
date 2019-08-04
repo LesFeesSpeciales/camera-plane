@@ -1,4 +1,4 @@
-# Copyright (C) 2016 Les Fees Speciales
+# Copyright (C) 2016-2019 Les Fees Speciales
 # voeu@les-fees-speciales.coop
 #
 #    This program is free software; you can redistribute it and/or modify
@@ -19,8 +19,8 @@
 bl_info = {
     "name": "Create Camera Plane",
     "author": "Les Fees Speciales",
-    "version": (1, 0),
-    "blender": (2, 79, 0),
+    "version": (1, 0, 1),
+    "blender": (2, 80, 0),
     "location": "Camera > Camera Plane",
     "description": "Imports image and sticks it to the camera",
     "warning": "",
@@ -152,9 +152,6 @@ class IMPORT_OT_Camera_Plane(bpy.types.Operator, ImportHelper):
             # driver type
             driver.driver.type = 'SCRIPTED'
 
-            # enable Debug Info
-            driver.driver.show_debug_info = True
-
             # Variable
             var = driver.driver.variables.new()
             var.name = "distance"
@@ -171,9 +168,6 @@ class IMPORT_OT_Camera_Plane(bpy.types.Operator, ImportHelper):
 
                 # driver type
                 driver.driver.type = 'SCRIPTED'
-
-                # enable Debug Info
-                driver.driver.show_debug_info = True
 
                 # Variable DISTANCE
                 var = driver.driver.variables.new()
@@ -205,28 +199,24 @@ class IMPORT_OT_Camera_Plane(bpy.types.Operator, ImportHelper):
 
     def execute(self, context):
         return self.build_camera_plane(context)
-        #return {'FINISHED'}
 
-#
 #    Registration
 #    Makes it possible to access the script from the Add > Mesh menu
-#
-
 
 def menu_func(self, context):
     self.layout.operator(
         "camera.camera_plane_build",
         text="Camera Plane",
-        icon='MESH_PLANE')
+        icon='FILE_IMAGE')
 
 
 def register():
-    bpy.utils.register_module(__name__)
+    bpy.utils.register_class(IMPORT_OT_Camera_Plane)
     bpy.types.DATA_PT_camera.append(menu_func)
 
 
 def unregister():
-    bpy.utils.unregister_module(__name__)
+    bpy.utils.unregister_class(IMPORT_OT_Camera_Plane)
     bpy.types.DATA_PT_camera.remove(menu_func)
 
 if __name__ == "__main__":
