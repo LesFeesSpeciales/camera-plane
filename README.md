@@ -1,3 +1,8 @@
+## Deprecation
+This project has moved to [GitLab](https://gitlab.com/lfs.coop/blender/camera-plane).
+
+-----
+
 # Camera plane
 Import an image and parent it to the camera. You can then set the distance and width from the image object's properties. The plane will adjust to the camera's FOV or focal length.  
 You can easily import several images at once, which will be equally spaced in depth. This is useful when creating painted stage-like sets which need to stick to a camera.
